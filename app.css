@@ -1,0 +1,12 @@
+.wrapper {
+	border-radius: 20px;
+	box-shadow:  2px 3px 2px #341fe6,
+	-1px -1px 1px #cfd0d0;
+	border-bottom: 2px solid #3e2fbf;
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	padding: 1rem;
+	max-width: 600px;
+}
