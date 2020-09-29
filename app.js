@@ -1,31 +1,3 @@
-const players = [
-	{
-		name: "Josh",
-		score: 100,
-		id: 1
-	},
-	{
-		name: "Mike",
-		score: 20,
-		id: 2
-	},
-	{
-		name: "Harvey",
-		score: 50,
-		id: 3
-	},
-	{
-		name: "Rachel",
-		score: 30,
-		id: 4
-	},
-	{
-		name: "Donna",
-		score: 90,
-		id: 5
-	}
-];
-
 const Header = (props) => {
 	return (
 		<header>
@@ -53,15 +25,15 @@ class Counter extends React.Component {
 	};
 
 	incrementScore = () => {
-		this.setState({
-			score: this.state.score + 1
-		});
+		this.setState( prevState => ({
+			score: prevState.score + 1
+		}));
 	}
 
 	decrementScore = () => {
-		this.setState({
-			score: this.state.score - 1
-		});
+		this.setState( prevState => ({
+			score: prevState.score - 1
+		}));
 	}
 
 	render() {
@@ -76,26 +48,69 @@ class Counter extends React.Component {
 	}
 }
 
-const App = (props) => {
-	return (
-		<div className="scoreboard">
-			<Header
-				title="ScoreBoard"
-				totalPlayers={ props.initialsPlayers.length }
-			/>
+class App extends React.Component {
 
-			{/* Prints all Players */}
-			{ props.initialsPlayers.map( player =>
-				<Player
-					name={ player.name }
-					key={ player.id.toString() }
+	state = {
+		players: [
+			{
+				name: "Josh",
+				score: 100,
+				id: 1
+			},
+			{
+				name: "Mike",
+				score: 20,
+				id: 2
+			},
+			{
+				name: "Harvey",
+				score: 50,
+				id: 3
+			},
+			{
+				name: "Rachel",
+				score: 30,
+				id: 4
+			},
+			{
+				name: "Donna",
+				score: 90,
+				id: 5
+			}
+		]
+	};
+
+	handleRemovePlayer = (id) => {
+		this.setState( prevState => {
+			return {
+				players: prevState.players.filter( p => p.id !== id )
+			}
+		});
+	}
+
+	render() {
+		return (
+			<div className="scoreboard">
+				<Header
+					title="ScoreBoard"
+					totalPlayers={ this.state.players.length }
 				/>
-			)}
-		</div>
-	);
+
+				{/* Prints all Players */}
+				{ this.state.players.map( player =>
+					<Player
+						name={ player.name }
+						id={player.id}
+						key={ player.id.toString() }
+						removePlayer={this.handleRemovePlayer}
+					/>
+				)}
+			</div>
+		);
+	}
 }
 
 ReactDOM.render(
-	<App initialsPlayers={ players } />,
+	<App />,
 	document.getElementById('root')
 );

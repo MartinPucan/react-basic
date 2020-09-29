@@ -1,0 +1,39 @@
+.wrapper {
+	border-radius: 20px;
+	box-shadow:  2px 3px 2px #341fe6,
+	-1px -1px 1px #cfd0d0;
+	border-bottom: 2px solid #3e2fbf;
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	max-width: 600px;
+	width: 100%;
+}
+
+h1 {
+	text-align: center;
+}
+
+.player {
+	width: 100%;
+	max-width: 585px;
+	background: #fcfcfc;
+	border-bottom: 1px solid #cdd1d7;
+	padding: .4em;
+	display: inline-flex;
+	justify-content: space-between;
+	font-size: 1.2em;
+}
+
+.player:last-child {
+	border-bottom-left-radius: 20px;
+	border-bottom-right-radius: 20px;
+}
+
+.counter {
+	padding: .3em;
+}
+
+
+/*# sourceMappingURL=/app.ae05fb60.css.map */
