@@ -18,6 +18,7 @@
   "main": "public/js/app.js",
   "scripts": {
     "start": "parcel index.html",
+    "react": "react-scripts start",
     "build": "parcel build public/css/*.scss --public-url /css/ --out-dir dist/css"
   },
   "repository": {
