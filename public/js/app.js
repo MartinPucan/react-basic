@@ -1,111 +1,63 @@
+import regeneratorRuntime from "regenerator-runtime";
+import React from "react";
+
 const Header = (props) => {
 	return (
 		<header>
 			<h1>{ props.title }</h1>
-			<span>Player: { props.totalPlayers }</span>
+			<span className="length">length: { props.totalUsers }</span>
 		</header>
 	);
 }
 
-const Player = (props) => {
+const User = (props) => {
 	return (
-		<div className="player">
-			<span className="player-name">
-				<button className="remove-player" onClick={ () => props.removePlayer(props.id) }>
-					✖
-				</button>
-				{ props.name }
-			</span>
-			<Counter />
+		<div className="user">
+			<div className="user-name">{ props.name }</div>
+			<button className="remove-user" onClick={ () => props.removeUser(props.id) }>
+				✖
+			</button>
 		</div>
 	);
-}
-
-class Counter extends React.Component {
-
-	state = {
-		score: 0
-	};
-
-	incrementScore = () => {
-		this.setState( prevState => ({
-			score: prevState.score + 1
-		}));
-	}
-
-	decrementScore = () => {
-		this.setState( prevState => ({
-			score: prevState.score - 1
-		}));
-	}
-
-	render() {
-		return (
-			<div className="counter">
-				<button className="counter-action decrement" onClick={this.decrementScore}> - </button>
-				<span className="counter-score">{ this.state.score }</span>
-				<button className="counter-action increment"
-						onClick={this.incrementScore}> + </button>
-			</div>
-		);
-	}
 }
 
 class App extends React.Component {
 
 	state = {
-		players: [
-			{
-				name: "Josh",
-				score: 100,
-				id: 1
-			},
-			{
-				name: "Mike",
-				score: 20,
-				id: 2
-			},
-			{
-				name: "Harvey",
-				score: 50,
-				id: 3
-			},
-			{
-				name: "Rachel",
-				score: 30,
-				id: 4
-			},
-			{
-				name: "Donna",
-				score: 90,
-				id: 5
-			}
-		]
+		users: []
 	};
 
-	handleRemovePlayer = (id) => {
+	componentDidMount = async () => {
+		const apiUrl = 'https://reqres.in/api/users?page=2';
+
+		const usersResponse = await fetch(apiUrl);
+		const { data } = await usersResponse.json();
+
+		this.setState({ users: data });
+	}
+
+	handleRemoveUser = (id) => {
 		this.setState( prevState => {
 			return {
-				players: prevState.players.filter( p => p.id !== id )
+				users: prevState.users.filter( p => p.id !== id )
 			}
 		});
 	}
 
 	render() {
 		return (
-			<div className="scoreboard">
+			<div className="title">
 				<Header
-					title="ScoreBoard"
-					totalPlayers={ this.state.players.length }
+					title="Users"
+					totalUsers={ this.state.users.length }
 				/>
 
-				{/* Prints all Players */}
-				{ this.state.players.map( player =>
-					<Player
-						name={ player.name }
-						id={player.id}
-						key={ player.id.toString() }
-						removePlayer={this.handleRemovePlayer}
+				{ this.state.users.map( user =>
+					<User
+						name={ user.email }
+						id={user.id}
+						key={ user.id.toString() }
+						removeUser={this.handleRemoveUser}
 					/>
 				)}
 			</div>

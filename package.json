@@ -3,7 +3,8 @@
     "@ant-design/dark-theme": "^2.0.2",
     "@ant-design/icons": "^4.2.2",
     "babel": "^6.23.0",
-    "react": "^16.13.1"
+    "react": "^16.13.1",
+    "regenerator-runtime": "^0.13.7"
   },
   "devDependencies": {
     "antd": "^4.6.6",
