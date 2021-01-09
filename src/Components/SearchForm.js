@@ -2,11 +2,10 @@ import React from 'react';
 
 function SearchForm(props) {
 
-  const onSearchChange = (e) => { 
-    // Update state 
+  const onSearchChange = e => {
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     e.currentTarget.reset();
   }

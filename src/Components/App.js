@@ -9,15 +9,16 @@ function App() {
 
   return (
     <>
-      <div className="main-header">
+      <section className="main-header">
         <div className="inner">
           <h1 className="main-title">GifSearch</h1>
           <SearchForm />
         </div>
-      </div>
-      <div className="main-content">
+      </section>
+      <section className="main-content">
+				<GifList />
 
-      </div>
+      </section>
     </>
   );
 }
